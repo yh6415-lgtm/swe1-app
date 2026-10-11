@@ -1,0 +1,26 @@
+:root { font-family: system-ui, sans-serif; color: #202634; background: #f6f7fb; }
+* { box-sizing: border-box; }
+body { margin: 0; line-height: 1.6; }
+header, main, footer { max-width: 740px; margin: auto; padding: 24px; }
+header a { font-weight: 750; text-decoration: none; }
+main { background: white; border: 1px solid #e3e5ef; border-radius: 16px; padding: 36px; }
+h1 { line-height: 1.2; margin: 8px 0 22px; font-size: clamp(1.8rem, 5vw, 2.6rem); }
+a { color: #393ea7; text-underline-offset: 3px; }
+.eyebrow { color: #545abd; font-size: .8rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin: 0; }
+.intro, footer { color: #5f6575; }
+ul { padding: 0; list-style: none; }
+.poll-list li, .results li { border-bottom: 1px solid #e3e5ef; padding: 18px 0; }
+.poll-list a, .results li { display: flex; justify-content: space-between; gap: 20px; }
+.poll-list a { text-decoration: none; font-weight: 650; }
+.results strong { white-space: nowrap; }
+fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
+legend { padding: 0; width: 100%; }
+.choice { display: flex; gap: 12px; align-items: center; padding: 16px; margin-bottom: 12px; border: 1px solid #d9dce9; border-radius: 8px; cursor: pointer; }
+.choice:has(input:checked) { border-color: #545abd; background: #f0f0fc; }
+input[type=radio] { accent-color: #545abd; width: 18px; height: 18px; flex-shrink: 0; }
+button, .button { display: inline-block; border: 0; border-radius: 8px; padding: 12px 24px; color: white; background: #454bb5; cursor: pointer; font: inherit; font-weight: 650; text-decoration: none; }
+button { margin-top: 12px; }
+nav { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; margin-top: 28px; }
+.error { color: #a12626; background: #fff2f2; border-radius: 8px; padding: 12px; }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid #d27e13; outline-offset: 4px; }
+@media (max-width: 780px) { main { margin: 0 16px; padding: 24px; } .results li { flex-wrap: wrap; gap: 8px; } }

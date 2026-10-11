@@ -1,0 +1,12 @@
+{% extends 'polls/base.html' %}
+{% block title %}Results{% endblock %}
+{% block content %}
+<p class="eyebrow">Results</p>
+<h1>{{ question.question_text }}</h1>
+<ul class="results">
+    {% for choice in question.choice_set.all %}
+    <li><span>{{ choice.choice_text }}</span><strong>{{ choice.votes }} vote{{ choice.votes|pluralize }}</strong></li>
+    {% empty %}<li>No choices are available yet.</li>{% endfor %}
+</ul>
+<nav><a class="button" href="{% url 'polls:detail' question.id %}">Vote again</a> <a href="{% url 'polls:index' %}">All polls</a></nav>
+{% endblock %}

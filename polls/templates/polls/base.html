@@ -1,0 +1,15 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Polls{% endblock %} | SWE1</title>
+    <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+</head>
+<body>
+    <header><a href="{% url 'polls:index' %}">SWE1 / Polls</a></header>
+    <main>{% block content %}{% endblock %}</main>
+    <footer>A simple Django voting application.</footer>
+</body>
+</html>
