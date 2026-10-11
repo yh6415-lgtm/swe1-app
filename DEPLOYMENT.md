@@ -51,7 +51,7 @@ https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sign-in.html
 ```powershell
 .\.venv\Scripts\python.exe -m venv .ebcli-venv
 .\.ebcli-venv\Scripts\python.exe -m pip install awsebcli
-.\.ebcli-venv\Scripts\python.exe -m ebcli --version
+.\.ebcli-venv\Scripts\eb.exe --version
 ```
 
 ## 4. 部署
@@ -76,9 +76,9 @@ SSH 私钥只存于本人用户目录的 `.ssh`，不会写入仓库。
 常用诊断命令（环境名通常为 `swe1-app-你的AWS账号ID`）：
 
 ```powershell
-.\.ebcli-venv\Scripts\python.exe -m ebcli status 环境名
-.\.ebcli-venv\Scripts\python.exe -m ebcli events 环境名
-.\.ebcli-venv\Scripts\python.exe -m ebcli logs 环境名
+.\.ebcli-venv\Scripts\eb.exe status 环境名
+.\.ebcli-venv\Scripts\eb.exe events 环境名
+.\.ebcli-venv\Scripts\eb.exe logs 环境名
 ```
 
 如需管理员账号，用 SSH 登录实例，再创建本人密码：

@@ -63,7 +63,8 @@ def main():
     print(f"AWS account: {identity['Account']}; region: {args.region}; environment: {name}", flush=True)
 
     eb_python = ROOT / ".ebcli-venv" / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
-    if not eb_python.exists():
+    eb_command = ROOT / ".ebcli-venv" / ("Scripts/eb.exe" if os.name == "nt" else "bin/eb")
+    if not eb_python.exists() or not eb_command.exists():
         raise RuntimeError("Install the isolated EB CLI as described in DEPLOYMENT.md.")
     # AWS CLI login credentials are also usable with older EB CLI SDK versions.
     credentials = aws.call("configure", "export-credentials", "--format", "process")
@@ -76,7 +77,7 @@ def main():
     }
 
     def eb(*arguments):
-        result = subprocess.run([str(eb_python), "-m", "ebcli", *arguments],
+        result = subprocess.run([str(eb_command), *arguments],
                                 cwd=ROOT, env=eb_environment)
         if result.returncode:
             raise RuntimeError("EB CLI failed. Inspect its messages or run eb logs.")
