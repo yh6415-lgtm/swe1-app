@@ -81,7 +81,10 @@ SSH 私钥只存于本人用户目录的 `.ssh`，不会写入仓库。
 .\.ebcli-venv\Scripts\eb.exe logs 环境名
 ```
 
-如需管理员账号，用 SSH 登录实例，再创建本人密码：
+本次已在本机和 AWS 实例创建管理员 `course-admin`。本作业专用密码保存在本机
+`%USERPROFILE%\.swe1-app\admin-login.env`，文件权限仅允许本人访问，位于 Git 仓库和部署包之外。
+
+今后需要新建管理员时，用 SSH 登录实例，再创建本人密码：
 
 ```powershell
 ssh -i "$env:USERPROFILE\.ssh\环境名-us-east-1.pem" ec2-user@实例公网地址
@@ -115,6 +118,8 @@ HTTP 环境只使用本作业专用管理员密码，不要复用其他网站密
 - GitHub 仓库可直接访问，默认分支包含代码及迁移文件。
 
 GitHub 仓库地址：https://github.com/yuelihe2-svg/swe1-app
+已部署的应用地址：http://swe1-app-287872994760.us-east-1.elasticbeanstalk.com/polls/
+2026-10-11 已验证云端首页、无选项错误提示、投票和结果页；EB 状态为 Ready / Green。
 在 Brightspace 提交两个真实链接，不要提交 localhost、示例域名或 AWS 控制台地址。
 
 评分完成后在 EB 控制台终止本作业环境，并检查 EC2、EBS、Elastic IP、S3 等残留资源。

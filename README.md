@@ -3,6 +3,10 @@
 Individual Software Engineering I assignment: the Django 5.2 polls application,
 covering [tutorial parts 1-4](https://docs.djangoproject.com/en/5.2/intro/tutorial01/).
 
+Live application: [Open polls](http://swe1-app-287872994760.us-east-1.elasticbeanstalk.com/polls/).
+
+Repository: [yuelihe2-svg/swe1-app](https://github.com/yuelihe2-svg/swe1-app).
+
 ## Features
 
 - Latest published questions at `/polls/`.

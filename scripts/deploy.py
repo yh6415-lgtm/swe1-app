@@ -49,6 +49,27 @@ class Aws:
                       "--policy-arn", "arn:aws:iam::aws:policy/" + policy)
 
 
+def secure_private_key(path):
+    if os.name != "nt":
+        path.chmod(0o600)
+        return
+    # POSIX mode bits do not restrict Windows ACLs. OpenSSH requires a private
+    # key to be accessible only to its owner.
+    key_path = str(path).replace("'", "''")
+    command = (
+        f"$keyPath = '{key_path}'; "
+        "$keyOwner = [System.Security.Principal.WindowsIdentity]::GetCurrent().User; "
+        "$keyAcl = New-Object System.Security.AccessControl.FileSecurity; "
+        "$keyAcl.SetOwner($keyOwner); "
+        "$keyAcl.SetAccessRuleProtection($true, $false); "
+        "$keyRule = New-Object System.Security.AccessControl.FileSystemAccessRule"
+        "($keyOwner, 'FullControl', 'Allow'); "
+        "$keyAcl.AddAccessRule($keyRule); "
+        "[System.IO.File]::SetAccessControl($keyPath, $keyAcl)"
+    )
+    subprocess.run(["powershell.exe", "-NoProfile", "-NonInteractive", "-Command", command], check=True)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--region", default="us-east-1")
@@ -101,7 +122,7 @@ def main():
         service_role = "swe1-app-eb-service-role"
         instance_role = "swe1-app-eb-ec2-role"
         aws.ensure_role(service_role, "elasticbeanstalk.amazonaws.com", [
-            "AWSElasticBeanstalkEnhancedHealth", "AWSElasticBeanstalkManagedUpdatesCustomerRolePolicy",
+            "service-role/AWSElasticBeanstalkEnhancedHealth", "AWSElasticBeanstalkManagedUpdatesCustomerRolePolicy",
         ])
         aws.ensure_role(instance_role, "ec2.amazonaws.com", ["AWSElasticBeanstalkWebTier"])
         profile = aws.call("iam", "get-instance-profile", "--instance-profile-name", instance_role, missing="NoSuchEntity")
@@ -129,6 +150,7 @@ def main():
                 stream.write(key["KeyMaterial"])
         elif not keyfile.exists():
             raise RuntimeError("The AWS SSH key exists but its local private key is missing; select a new environment name.")
+        secure_private_key(keyfile)
         # Give IAM time to propagate before EB requests EC2 instances.
         time.sleep(10)
 
