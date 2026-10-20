@@ -1,0 +1,15 @@
+[run]
+branch = True
+source = mysite,polls
+omit =
+    */migrations/*
+    */tests.py
+    mysite/asgi.py
+    mysite/wsgi.py
+
+[report]
+show_missing = True
+skip_empty = True
+
+[xml]
+output = coverage.xml

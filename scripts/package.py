@@ -1,4 +1,5 @@
 """Build an EB source ZIP with manage.py at the root and no local secrets."""
+
 from pathlib import Path
 from zipfile import ZIP_DEFLATED, ZipFile
 
@@ -13,12 +14,19 @@ def build_package():
             archive.write(ROOT / filename, filename)
         for folder in ("mysite", "polls", ".ebextensions"):
             for path in sorted((ROOT / folder).rglob("*")):
-                if path.is_file() and "__pycache__" not in path.parts and path.suffix != ".pyc":
+                if (
+                    path.is_file()
+                    and "__pycache__" not in path.parts
+                    and path.suffix != ".pyc"
+                ):
                     archive.write(path, path.relative_to(ROOT).as_posix())
     with ZipFile(output) as archive:
         assert "manage.py" in archive.namelist()
         assert ".ebextensions/django.config" in archive.namelist()
-        assert not any(name.endswith((".sqlite3", ".pem", ".key", ".pyc")) for name in archive.namelist())
+        assert not any(
+            name.endswith((".sqlite3", ".pem", ".key", ".pyc"))
+            for name in archive.namelist()
+        )
     return output
 
 

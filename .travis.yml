@@ -1,0 +1,49 @@
+language: python
+os: linux
+dist: jammy
+python:
+  - "3.12"
+
+cache: pip
+
+env:
+  global:
+    - DJANGO_SETTINGS_MODULE=mysite.settings
+    - DJANGO_DEBUG=True
+
+install:
+  - python -m pip install -r requirements-dev.txt
+
+script:
+  - python -m black --check .
+  - python -m flake8 .
+  - python manage.py check
+  - python manage.py makemigrations --check --dry-run
+  - python -m coverage run manage.py test --noinput
+  - python -m coverage report
+  - python -m coverage xml
+  - coveralls
+
+before_deploy:
+  - python scripts/package.py
+
+deploy:
+  provider: elasticbeanstalk
+  edge: true
+  access_key_id: "$AWS_ACCESS_KEY_ID"
+  secret_access_key: "$AWS_SECRET_ACCESS_KEY"
+  region: us-east-1
+  app: swe1-app
+  env: swe1-app-287872994760
+  bucket: elasticbeanstalk-us-east-1-287872994760
+  bucket_path: swe1-app
+  zip_file: dist/swe1-app.zip
+  cleanup: false
+  wait_until_deployed: true
+  wait_until_deployed_timeout: 1200
+  on:
+    repo: yuelihe2-svg/swe1-app
+    branch: main
+
+after_deploy:
+  - python scripts/smoke_test.py

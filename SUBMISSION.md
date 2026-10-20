@@ -1,5 +1,7 @@
 # Brightspace submission
 
+Travis dashboard: https://app.travis-ci.com/github/yuelihe2-svg/swe1-app
+
 Django application: http://swe1-app-287872994760.us-east-1.elasticbeanstalk.com/polls/
 
 GitHub repository: https://github.com/yuelihe2-svg/swe1-app

@@ -15,3 +15,8 @@ dist/
 .pytest_cache/
 .DS_Store
 Thumbs.db
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.coveralls.yml
