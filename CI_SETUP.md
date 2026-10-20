@@ -38,9 +38,17 @@ The provider waits for EB to finish, then a live HTTP smoke check runs.
 - Invite `slurpysalmon` with **Write** permission. An outstanding invitation needs
   to be accepted by the recipient.
 - Protect `main` with required status checks and up-to-date branches. Select the
-  actual Travis PR check emitted by a verification PR. The legacy status context
-  is `continuous-integration/travis-ci/pr`; a GitHub App integration can emit a
-  different check name, which must be matched exactly.
+  actual Travis PR check emitted by a verification PR. This repository uses the
+  GitHub App integration and requires `Travis CI - Pull Request`. Verify this
+  name against the first running build after account credits are activated.
+
+## Student plan
+
+GitHub Student Developer Pack members can request the free student allowance by
+contacting `support@travis-ci.com` with their GitHub username, as described in
+[Travis onboarding](https://docs.travis-ci.com/user/onboarding/). A school email
+alone does not automatically activate a Travis plan. Ordinary free trials are
+currently unavailable; obtain student-plan approval before purchasing a plan.
 
 ## End-to-end acceptance
 
