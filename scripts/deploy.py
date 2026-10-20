@@ -315,6 +315,7 @@ def main():
     submission = ROOT / "SUBMISSION.md"
     submission.write_text(
         "# Brightspace submission\n\n"
+        "Travis dashboard: https://app.travis-ci.com/github/yuelihe2-svg/swe1-app\n\n"
         f"Django application: {url}\n\n"
         "GitHub repository: https://github.com/yuelihe2-svg/swe1-app\n\n"
         "Before submitting, open the application in an incognito browser, "
