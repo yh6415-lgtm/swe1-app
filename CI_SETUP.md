@@ -2,7 +2,7 @@
 
 ## Services
 
-1. Sign in to Travis CI with `yuelihe2-svg` and enable `swe1-app` in the
+1. Sign in to Travis CI with `yh6415-lgtm` and enable `swe1-app` in the
    GitHub integration. Enable both **Build pushed branches** and **Build pushed
    pull requests** in the repository's Travis settings. Keep fork-PR secrets
    disabled. The account needs available build credits.
@@ -23,7 +23,9 @@
 ## Pipeline
 
 `.travis.yml` runs Black, flake8 (88 columns), Django system and migration checks,
-17 existing tests through coverage.py, and the Coveralls upload. The upload is
+static-file collection, 17 existing tests through coverage.py, and the Coveralls
+upload. Collecting static files creates the WhiteNoise manifest required by page
+rendering when Django runs tests with DEBUG=False. The upload is
 in `script`, so a reporting failure is visible as a failed build. Coverage includes
 application code and settings; tests, generated migrations and WSGI/ASGI startup
 wrappers are excluded. No minimum percentage is required by this assignment.
@@ -38,9 +40,21 @@ The provider waits for EB to finish, then a live HTTP smoke check runs.
 - Invite `slurpysalmon` with **Write** permission. An outstanding invitation needs
   to be accepted by the recipient.
 - Protect `main` with required status checks and up-to-date branches. Select the
-  actual Travis PR check emitted by a verification PR. The legacy status context
-  is `continuous-integration/travis-ci/pr`; a GitHub App integration can emit a
-  different check name, which must be matched exactly.
+  actual Travis PR check emitted by a verification PR. This repository uses the
+  GitHub App integration and requires `Travis CI - Pull Request`. Verify this
+  name against the first running build after account credits are activated.
+
+## Student plan
+
+The `yh6415-lgtm` account has an active, free **GitHub Student Developer Pack
+1 Concurrent plan**, verified on October 22, 2026, valid until November 21, 2026.
+Check the Travis Plan page before that date if further builds are needed.
+
+If a student plan is not assigned automatically, members can request it by
+contacting `support@travis-ci.com` with their GitHub username, as described in
+[Travis onboarding](https://docs.travis-ci.com/user/onboarding/). A school email
+alone does not automatically activate a Travis plan. Ordinary free trials are
+currently unavailable; obtain student-plan approval before purchasing a plan.
 
 ## End-to-end acceptance
 

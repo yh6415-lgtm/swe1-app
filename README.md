@@ -1,14 +1,14 @@
 # swe1-app
 
-[![Build Status](https://app.travis-ci.com/yuelihe2-svg/swe1-app.svg?branch=main)](https://app.travis-ci.com/github/yuelihe2-svg/swe1-app)
-[![Coverage Status](https://coveralls.io/repos/github/yuelihe2-svg/swe1-app/badge.svg?branch=main)](https://coveralls.io/github/yuelihe2-svg/swe1-app?branch=main)
+[![Build Status](https://app.travis-ci.com/yh6415-lgtm/swe1-app.svg?branch=main)](https://app.travis-ci.com/github/yh6415-lgtm/swe1-app)
+[![Coverage Status](https://coveralls.io/repos/github/yh6415-lgtm/swe1-app/badge.svg?branch=main)](https://coveralls.io/github/yh6415-lgtm/swe1-app?branch=main)
 
 Individual Software Engineering I assignment: the Django 5.2 polls application,
 covering [tutorial parts 1-4](https://docs.djangoproject.com/en/5.2/intro/tutorial01/).
 
 Live application: [Open polls](http://swe1-app-287872994760.us-east-1.elasticbeanstalk.com/polls/).
 
-Repository: [yuelihe2-svg/swe1-app](https://github.com/yuelihe2-svg/swe1-app).
+Repository: [yh6415-lgtm/swe1-app](https://github.com/yh6415-lgtm/swe1-app).
 
 ## Features
 
@@ -48,6 +48,7 @@ Install the development tools and run the same checks as Travis CI:
 .\.venv\Scripts\python.exe -m flake8 .
 .\.venv\Scripts\python.exe manage.py check
 .\.venv\Scripts\python.exe manage.py makemigrations --check --dry-run
+.\.venv\Scripts\python.exe manage.py collectstatic --noinput
 .\.venv\Scripts\python.exe -m coverage run manage.py test --noinput
 .\.venv\Scripts\python.exe -m coverage report
 ```
@@ -57,8 +58,8 @@ CSRF, admin access, future publication dates and repeatable sample-data setup.
 
 ## Continuous integration and deployment
 
-[Travis dashboard](https://app.travis-ci.com/github/yuelihe2-svg/swe1-app)
-and [Coveralls report](https://coveralls.io/github/yuelihe2-svg/swe1-app).
+[Travis dashboard](https://app.travis-ci.com/github/yh6415-lgtm/swe1-app)
+and [Coveralls report](https://coveralls.io/github/yh6415-lgtm/swe1-app).
 
 Every push and pull request runs Black, flake8, Django checks and the test suite
 under coverage.py, then uploads coverage to Coveralls. A failed check fails the

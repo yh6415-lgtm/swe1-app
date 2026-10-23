@@ -117,7 +117,7 @@ HTTP 环境只使用本作业专用管理员密码，不要复用其他网站密
 - 回到首页、再次投票均可正常使用。
 - GitHub 仓库可直接访问，默认分支包含代码及迁移文件。
 
-GitHub 仓库地址：https://github.com/yuelihe2-svg/swe1-app
+GitHub 仓库地址：https://github.com/yh6415-lgtm/swe1-app
 已部署的应用地址：http://swe1-app-287872994760.us-east-1.elasticbeanstalk.com/polls/
 2026-10-11 已验证云端首页、无选项错误提示、投票和结果页；EB 状态为 Ready / Green。
 在 Brightspace 提交两个真实链接，不要提交 localhost、示例域名或 AWS 控制台地址。

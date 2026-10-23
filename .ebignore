@@ -18,3 +18,14 @@ README.md
 DEPLOYMENT.md
 SUBMISSION.md
 scripts/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.coveralls.yml
+.travis.yml
+.coveragerc
+.flake8
+pyproject.toml
+requirements-dev.txt
+CI_SETUP.md

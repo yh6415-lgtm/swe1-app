@@ -1,0 +1,48 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ReadDeploymentStatus",
+      "Effect": "Allow",
+      "Action": [
+        "elasticbeanstalk:DescribeApplications",
+        "elasticbeanstalk:DescribeApplicationVersions",
+        "elasticbeanstalk:DescribeEnvironments",
+        "elasticbeanstalk:DescribeEvents"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "CreateCourseworkVersions",
+      "Effect": "Allow",
+      "Action": "elasticbeanstalk:CreateApplicationVersion",
+      "Resource": [
+        "arn:aws:elasticbeanstalk:us-east-1:287872994760:application/swe1-app",
+        "arn:aws:elasticbeanstalk:us-east-1:287872994760:applicationversion/swe1-app/*"
+      ]
+    },
+    {
+      "Sid": "DeployCourseworkVersion",
+      "Effect": "Allow",
+      "Action": "elasticbeanstalk:UpdateEnvironment",
+      "Resource": "arn:aws:elasticbeanstalk:us-east-1:287872994760:environment/swe1-app/swe1-app-287872994760",
+      "Condition": {
+        "StringLike": {
+          "elasticbeanstalk:FromApplicationVersion": "arn:aws:elasticbeanstalk:us-east-1:287872994760:applicationversion/swe1-app/*"
+        }
+      }
+    },
+    {
+      "Sid": "InspectExistingSourceBucket",
+      "Effect": "Allow",
+      "Action": ["s3:ListBucket", "s3:GetBucketLocation"],
+      "Resource": "arn:aws:s3:::elasticbeanstalk-us-east-1-287872994760"
+    },
+    {
+      "Sid": "UploadCourseworkBundles",
+      "Effect": "Allow",
+      "Action": ["s3:PutObject", "s3:GetObject"],
+      "Resource": "arn:aws:s3:::elasticbeanstalk-us-east-1-287872994760/swe1-app/*"
+    }
+  ]
+}
