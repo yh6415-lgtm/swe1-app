@@ -15,6 +15,13 @@
    restricted to `main`. Use a dedicated IAM deployment identity with access
    to this EB application/environment and its source-bundle S3 prefix. Do not
    use root credentials or short-lived `aws login` credentials for ongoing CI.
+   The verified customer-managed policy is `swe1-app-travis-deploy-policy`; its
+   source is `scripts/travis-deploy-policy.json`. It includes the app bundle
+   prefix, this environment runtime prefix, and the application-specific
+   `resources/_runtime/_embedded_extensions/swe1-app/` cache used by EB to
+   process `.ebextensions`. Infrastructure calls are restricted to this
+   environment or to requests made through Elastic Beanstalk. Existing
+   environment roles may only be passed to EB/EC2.
 4. The existing deployment target is application `swe1-app`, environment
    `swe1-app-287872994760`, region `us-east-1`, source bucket
    `elasticbeanstalk-us-east-1-287872994760`. Verify the bucket and IAM permissions
@@ -42,7 +49,8 @@ The provider waits for EB to finish, then a live HTTP smoke check runs.
 - Protect `main` with required status checks and up-to-date branches. Select the
   actual Travis PR check emitted by a verification PR. This repository uses the
   GitHub App integration and requires `Travis CI - Pull Request`. Verify this
-  name against the first running build after account credits are activated.
+  name against the checks attached to verification PR #1; it passed with
+  the Travis GitHub App (ID 67). `slurpysalmon` has accepted Write access.
 
 ## Student plan
 
