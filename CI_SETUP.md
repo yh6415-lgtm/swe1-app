@@ -23,7 +23,9 @@
 ## Pipeline
 
 `.travis.yml` runs Black, flake8 (88 columns), Django system and migration checks,
-17 existing tests through coverage.py, and the Coveralls upload. The upload is
+static-file collection, 17 existing tests through coverage.py, and the Coveralls
+upload. Collecting static files creates the WhiteNoise manifest required by page
+rendering when Django runs tests with DEBUG=False. The upload is
 in `script`, so a reporting failure is visible as a failed build. Coverage includes
 application code and settings; tests, generated migrations and WSGI/ASGI startup
 wrappers are excluded. No minimum percentage is required by this assignment.

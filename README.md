@@ -48,6 +48,7 @@ Install the development tools and run the same checks as Travis CI:
 .\.venv\Scripts\python.exe -m flake8 .
 .\.venv\Scripts\python.exe manage.py check
 .\.venv\Scripts\python.exe manage.py makemigrations --check --dry-run
+.\.venv\Scripts\python.exe manage.py collectstatic --noinput
 .\.venv\Scripts\python.exe -m coverage run manage.py test --noinput
 .\.venv\Scripts\python.exe -m coverage report
 ```
