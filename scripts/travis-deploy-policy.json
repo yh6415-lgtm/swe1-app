@@ -5,10 +5,7 @@
       "Sid": "ReadDeploymentStatus",
       "Effect": "Allow",
       "Action": [
-        "elasticbeanstalk:DescribeApplications",
-        "elasticbeanstalk:DescribeApplicationVersions",
-        "elasticbeanstalk:DescribeEnvironments",
-        "elasticbeanstalk:DescribeEvents"
+        "elasticbeanstalk:Describe*"
       ],
       "Resource": "*"
     },
@@ -25,24 +22,152 @@
       "Sid": "DeployCourseworkVersion",
       "Effect": "Allow",
       "Action": "elasticbeanstalk:UpdateEnvironment",
-      "Resource": "arn:aws:elasticbeanstalk:us-east-1:287872994760:environment/swe1-app/swe1-app-287872994760",
-      "Condition": {
-        "StringLike": {
-          "elasticbeanstalk:FromApplicationVersion": "arn:aws:elasticbeanstalk:us-east-1:287872994760:applicationversion/swe1-app/*"
-        }
-      }
+      "Resource": "arn:aws:elasticbeanstalk:us-east-1:287872994760:environment/swe1-app/swe1-app-287872994760"
     },
     {
       "Sid": "InspectExistingSourceBucket",
       "Effect": "Allow",
-      "Action": ["s3:ListBucket", "s3:GetBucketLocation"],
+      "Action": [
+        "s3:ListBucket",
+        "s3:GetBucketLocation",
+        "s3:GetBucketPolicy",
+        "s3:GetBucketAcl",
+        "s3:GetBucketVersioning",
+        "s3:ListBucketVersions"
+      ],
       "Resource": "arn:aws:s3:::elasticbeanstalk-us-east-1-287872994760"
     },
     {
       "Sid": "UploadCourseworkBundles",
       "Effect": "Allow",
-      "Action": ["s3:PutObject", "s3:GetObject"],
+      "Action": [
+        "s3:PutObject",
+        "s3:GetObject",
+        "s3:GetObjectVersion",
+        "s3:GetObjectVersionAcl"
+      ],
       "Resource": "arn:aws:s3:::elasticbeanstalk-us-east-1-287872994760/swe1-app/*"
+    },
+    {
+      "Sid": "ManageExistingEnvironmentStack",
+      "Effect": "Allow",
+      "Action": [
+        "cloudformation:GetTemplate",
+        "cloudformation:DescribeStackResource",
+        "cloudformation:DescribeStackResources",
+        "cloudformation:DescribeStacks",
+        "cloudformation:DescribeStackEvents",
+        "cloudformation:ListStackResources",
+        "cloudformation:UpdateStack"
+      ],
+      "Resource": "arn:aws:cloudformation:us-east-1:287872994760:stack/awseb-e-rgrg7w3umq-stack/*",
+      "Condition": {
+        "ForAnyValue:StringEquals": {
+          "aws:CalledVia": "elasticbeanstalk.amazonaws.com"
+        }
+      }
+    },
+    {
+      "Sid": "InspectSourceBucketObjectACLs",
+      "Effect": "Allow",
+      "Action": "s3:GetObjectAcl",
+      "Resource": "arn:aws:s3:::elasticbeanstalk-us-east-1-287872994760/*"
+    },
+    {
+      "Sid": "BeanstalkLaunchTemplatePermissionsCheck",
+      "Effect": "Allow",
+      "Action": "ec2:CreateLaunchTemplate",
+      "Resource": "arn:aws:ec2:us-east-1:287872994760:launch-template/*",
+      "Condition": {
+        "ForAnyValue:StringEquals": {
+          "aws:CalledVia": "elasticbeanstalk.amazonaws.com"
+        }
+      }
+    },
+    {
+      "Sid": "CopyBundlesIntoExistingEnvironment",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:PutObjectAcl",
+        "s3:DeleteObject",
+        "s3:GetObjectVersion",
+        "s3:GetObjectVersionAcl"
+      ],
+      "Resource": [
+        "arn:aws:s3:::elasticbeanstalk-us-east-1-287872994760/resources/environments/e-rgrg7w3umq/*",
+        "arn:aws:s3:::elasticbeanstalk-us-east-1-287872994760/resources/_runtime/_embedded_extensions/swe1-app/*"
+      ]
+    },
+    {
+      "Sid": "ReadEnvironmentInfrastructure",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DescribeKeyPairs",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeVpcs",
+        "ec2:DescribeInstances",
+        "ec2:DescribeImages",
+        "ec2:DescribeInstanceTypes",
+        "ec2:DescribeLaunchTemplates",
+        "ec2:DescribeLaunchTemplateVersions",
+        "autoscaling:DescribeAutoScalingGroups",
+        "autoscaling:DescribeLaunchConfigurations",
+        "ec2:DescribeAccountAttributes",
+        "ec2:DescribeAvailabilityZones",
+        "autoscaling:DescribeScalingActivities"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:RequestedRegion": "us-east-1"
+        },
+        "ForAnyValue:StringEquals": {
+          "aws:CalledVia": "elasticbeanstalk.amazonaws.com"
+        }
+      }
+    },
+    {
+      "Sid": "CoordinateDeploymentOnExistingGroup",
+      "Effect": "Allow",
+      "Action": [
+        "autoscaling:SuspendProcesses",
+        "autoscaling:ResumeProcesses"
+      ],
+      "Resource": "arn:aws:autoscaling:us-east-1:287872994760:autoScalingGroup:b6fe60cb-0b2b-476c-b1ed-edc302acf256:autoScalingGroupName/awseb-e-rgrg7w3umq-stack-AWSEBAutoScalingGroup-sCJgIJXRTv5p",
+      "Condition": {
+        "ForAnyValue:StringEquals": {
+          "aws:CalledVia": "elasticbeanstalk.amazonaws.com"
+        }
+      }
+    },
+    {
+      "Sid": "PassExistingEnvironmentRoles",
+      "Effect": "Allow",
+      "Action": "iam:PassRole",
+      "Resource": [
+        "arn:aws:iam::287872994760:role/swe1-app-eb-ec2-role",
+        "arn:aws:iam::287872994760:role/swe1-app-eb-service-role"
+      ],
+      "Condition": {
+        "StringEquals": {
+          "iam:PassedToService": [
+            "ec2.amazonaws.com",
+            "elasticbeanstalk.amazonaws.com"
+          ]
+        }
+      }
+    },
+    {
+      "Sid": "ValidateExistingEnvironmentConfiguration",
+      "Effect": "Allow",
+      "Action": "elasticbeanstalk:ValidateConfigurationSettings",
+      "Resource": [
+        "arn:aws:elasticbeanstalk:us-east-1:287872994760:application/swe1-app",
+        "arn:aws:elasticbeanstalk:us-east-1:287872994760:environment/swe1-app/swe1-app-287872994760"
+      ]
     }
   ]
 }
