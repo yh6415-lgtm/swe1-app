@@ -24,7 +24,7 @@ script:
   - python -m coverage run manage.py test --noinput
   - python -m coverage report
   - python -m coverage xml
-  - coveralls
+  - CI_BRANCH="$TRAVIS_BRANCH" CI_BUILD_NUMBER="$TRAVIS_BUILD_NUMBER" CI_BUILD_URL="$TRAVIS_BUILD_WEB_URL" coveralls
 
 before_deploy:
   - python scripts/package.py
