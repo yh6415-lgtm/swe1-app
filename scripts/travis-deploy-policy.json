@@ -35,14 +35,26 @@
     {
       "Sid": "InspectExistingSourceBucket",
       "Effect": "Allow",
-      "Action": ["s3:ListBucket", "s3:GetBucketLocation"],
+      "Action": [
+        "s3:ListBucket",
+        "s3:GetBucketLocation"
+      ],
       "Resource": "arn:aws:s3:::elasticbeanstalk-us-east-1-287872994760"
     },
     {
       "Sid": "UploadCourseworkBundles",
       "Effect": "Allow",
-      "Action": ["s3:PutObject", "s3:GetObject"],
+      "Action": [
+        "s3:PutObject",
+        "s3:GetObject"
+      ],
       "Resource": "arn:aws:s3:::elasticbeanstalk-us-east-1-287872994760/swe1-app/*"
+    },
+    {
+      "Sid": "ReadExistingEnvironmentTemplate",
+      "Effect": "Allow",
+      "Action": "cloudformation:GetTemplate",
+      "Resource": "arn:aws:cloudformation:us-east-1:287872994760:stack/awseb-e-rgrg7w3umq-stack/*"
     }
   ]
 }
