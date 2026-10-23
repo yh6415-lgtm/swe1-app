@@ -42,7 +42,7 @@ deploy:
   cleanup: false
   wait_until_deployed: true
   on:
-    repo: yuelihe2-svg/swe1-app
+    repo: yh6415-lgtm/swe1-app
     branch: main
 
 after_deploy:

@@ -2,7 +2,7 @@
 
 ## Services
 
-1. Sign in to Travis CI with `yuelihe2-svg` and enable `swe1-app` in the
+1. Sign in to Travis CI with `yh6415-lgtm` and enable `swe1-app` in the
    GitHub integration. Enable both **Build pushed branches** and **Build pushed
    pull requests** in the repository's Travis settings. Keep fork-PR secrets
    disabled. The account needs available build credits.
@@ -44,7 +44,11 @@ The provider waits for EB to finish, then a live HTTP smoke check runs.
 
 ## Student plan
 
-GitHub Student Developer Pack members can request the free student allowance by
+The `yh6415-lgtm` account has an active, free **GitHub Student Developer Pack
+1 Concurrent plan**, verified on October 22, 2026, valid until November 21, 2026.
+Check the Travis Plan page before that date if further builds are needed.
+
+If a student plan is not assigned automatically, members can request it by
 contacting `support@travis-ci.com` with their GitHub username, as described in
 [Travis onboarding](https://docs.travis-ci.com/user/onboarding/). A school email
 alone does not automatically activate a Travis plan. Ordinary free trials are
