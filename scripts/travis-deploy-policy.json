@@ -46,7 +46,8 @@
       "Effect": "Allow",
       "Action": [
         "s3:PutObject",
-        "s3:GetObject"
+        "s3:GetObject",
+        "s3:GetObjectAcl"
       ],
       "Resource": "arn:aws:s3:::elasticbeanstalk-us-east-1-287872994760/swe1-app/*"
     },
