@@ -7,7 +7,9 @@
    pull requests** in the repository's Travis settings. Keep fork-PR secrets
    disabled. The account needs available build credits.
 2. Sign in to Coveralls with the same GitHub account and enable this public
-   repository. The Python `coveralls` client recognizes Travis automatically.
+   repository. Set `COVERALLS_SERVICE_NAME=travis-pro` for `app.travis-ci.com`;
+   the client's default `travis-ci` selects the legacy Travis integration and
+   can leave Coveralls reports without branch/commit metadata and badges unknown.
    If the repository requires a token, store `COVERALLS_REPO_TOKEN` as a masked
    Travis environment variable, never in Git. Public fork PR builds should use
    Travis job authentication; do not expose AWS secrets to fork builds.
