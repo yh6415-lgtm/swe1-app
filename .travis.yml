@@ -10,6 +10,8 @@ env:
   global:
     - DJANGO_SETTINGS_MODULE=mysite.settings
     - DJANGO_DEBUG=True
+    # Coveralls uses travis-pro for travis-ci.com, including the student plan.
+    - COVERALLS_SERVICE_NAME=travis-pro
     - AWS_WAIT_UNTIL_DEPLOYED_TIMEOUT=1200
 
 install:
